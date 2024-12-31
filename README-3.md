@@ -11,10 +11,16 @@ It provides an application for the automated analysis of social media comments o
 
 This application performs **sentiment analysis** on comments from social media platforms (e.g., Instagram). It provides a **dashboard** for displaying the analyzed data. Concretely, you can:
 
-- **Upload JSON files** containing comments (e.g., from a sports club’s Instagram posts).
-- **Upload CSV files** that have already been processed for direct display in the dashboard.
+- **Upload JSON files** containing comments (e.g., from a sports club’s Instagram posts) to analyse with GPT.
+<img width="1726" alt="Bildschirmfoto 2024-12-31 um 15 09 14" src="https://github.com/user-attachments/assets/0db984eb-9de8-4d53-b4ab-940e498a8631" />
+
 - **Perform sentiment analysis** to determine whether comments are positive, neutral, or negative
+- **Upload CSV files** that have already been processed for direct display in the dashboard.
+<img width="1726" alt="Bildschirmfoto 2024-12-31 um 15 11 26" src="https://github.com/user-attachments/assets/db8d10f9-881a-45f0-8e01-31990f688639" />
+
 - **Visualize** data via statistics, histograms, word clouds, and sentiment-specific comment listings.
+<img width="1726" alt="Bildschirmfoto 2024-12-31 um 15 11 14" src="https://github.com/user-attachments/assets/73e2b4fb-e11d-4742-a4d3-92b255bbe032" />
+
 
 ### JSON File Format
 
@@ -218,7 +224,7 @@ weighted avg       0.68      0.38      0.43       200
 
 **Confusion Matrix**:
 
-![Vader Confusion Matrix](path/to/vader_confusion_matrix.png)
+![c6e77655-840a-4670-bfb7-5d6ad45cadd8](https://github.com/user-attachments/assets/93fbacca-1326-4621-bf72-8bc4d6d05c17)
 
 **Analysis**:
 - Vader performed poorly, especially for the **NEUTRAL** and **NEGATIVE** classes, where recall was below 0.35.
@@ -246,7 +252,7 @@ weighted avg       0.72      0.65      0.67       200
 
 **Confusion Matrix**:
 
-![XLM-Roberta Confusion Matrix](path/to/xlmroberta_confusion_matrix.png)
+![10e2bc4e-b972-4564-a8fd-dbcf09c20feb](https://github.com/user-attachments/assets/228d19e0-a599-4368-a270-ddbab30a4e30)
 
 **Analysis**:
 - XLM-Roberta significantly outperformed Vader, achieving an accuracy of 65%.
@@ -274,7 +280,7 @@ weighted avg       0.84      0.82      0.83       200
 
 **Confusion Matrix**:
 
-![GPT 4o-mini Confusion Matrix](path/to/gpt4o_mini_confusion_matrix.png)
+![2651fc0f-a08f-47ba-8f3d-204942579627](https://github.com/user-attachments/assets/33603255-12e1-4008-a2e2-a6d82ec6db7b)
 
 **Analysis**:
 - GPT 4o-mini achieved the highest accuracy (82%) and demonstrated robust performance across all classes.
@@ -283,7 +289,7 @@ weighted avg       0.84      0.82      0.83       200
 
 ---
 
-## Key Observations and Recommendations
+## Key Observations:
 
 1. **Overall Performance**:
    - GPT 4o-mini is the best-performing model, achieving the highest accuracy and balanced performance across all classes.
@@ -295,44 +301,4 @@ weighted avg       0.84      0.82      0.83       200
    - XLM-Roberta shows potential but requires further fine-tuning.
 
 3. **Practical Implications**:
-   - For production use, **GPT 4o-mini** is recommended due to its high accuracy and consistency.
-   - XLM-Roberta could be considered if computational efficiency or multilingual capabilities are prioritized.
-   - Vader should be avoided due to its poor performance and inability to handle nuanced sentiment.
-
----
-
-## Example Visualizations
-
-To illustrate these results, you can include visualizations such as bar charts comparing the metrics and the confusion matrices.
-
-**Example Bar Chart: Model Comparison**:
-
-```python
-import matplotlib.pyplot as plt
-
-models = ['Vader', 'XLM-Roberta', 'GPT 4o-mini']
-accuracy = [0.38, 0.65, 0.82]
-
-plt.bar(models, accuracy, color=['red', 'orange', 'green'])
-plt.title('Accuracy Comparison')
-plt.ylabel('Accuracy')
-plt.xlabel('Models')
-plt.ylim(0, 1)
-plt.show()
-```
-
-**Example Confusion Matrix**:
-
-Include images of confusion matrices (e.g., generated with `sklearn.metrics.ConfusionMatrixDisplay`).
-
-```python
-from sklearn.metrics import ConfusionMatrixDisplay
-
-# Example for GPT 4o-mini
-ConfusionMatrixDisplay(confusion_matrix=[[123, 15, 5], [7, 18, 3], [2, 4, 23]],
-                       display_labels=['POSITIVE', 'NEUTRAL', 'NEGATIVE']).plot(cmap='viridis')
-plt.title('GPT 4o-mini Confusion Matrix')
-plt.show()
-```
-
----
+   - For the sentiment analysis task in this application, **GPT 4o-mini** is used due to its high accuracy and consistency.
