@@ -137,7 +137,7 @@ To process JSON files, the following format is expected (example based on Instag
    ```
 
 2. **Install Python Libraries**  
-   - Ensure you have Python 3.8+ installed.
+   - Ensure you have Python 3.12 installed.
    - Use a virtual environment to avoid conflicts, then install dependencies:
      ```bash
      pip install -r requirements.txt
