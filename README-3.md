@@ -185,14 +185,7 @@ To process JSON files, the following format is expected (example based on Instag
 
 ---
 
-## 4. Additional Information
-
-- **Model Comparison**: In the `notebooks/models` folder, you will find comparisons of various sentiment analysis models (Vader, XLM-RoBerta, GPT 4o-mini).
-- **Data Sources**: The `data/instagram` folder includes JSON files that are already formatted for use in `app.py`.
-- **Processed Data**: Once you generate CSV files through the dashboard, they are saved to `data/processed`.
-- **Cookies & Scraping**: If you need to scrape Instagram, place a valid `insta-cookies.json` file in the `cookies` folder and use the scraping notebook under `Data_Collection`.
-
-## 5. Model Comparison: Evaluating Sentiment Analysis Models
+## 4. Model Comparison: Evaluating Sentiment Analysis Models
 
 To determine the most suitable sentiment analysis model for this project, three different models were evaluated:
 
@@ -202,13 +195,9 @@ To determine the most suitable sentiment analysis model for this project, three 
 
 The models were compared using key metrics: **Accuracy**, **Precision**, **Recall**, **F1-Score**, and **Confusion Matrices**.
 
----
-
 ### Metrics and Results
 
 Below are the evaluation results for each model on a dataset of 200 labeled comments.
-
----
 
 ### **1. Vader**
 
