@@ -142,7 +142,6 @@ To process JSON files, the following format is expected (example based on Instag
      ```bash
      pip install -r requirements.txt
      ```
-     *(Typical dependencies include `streamlit`, `pandas`, `matplotlib`, `nltk`, `wordcloud`, `plotly`, etc.)*
 
 3. **Add .env File (OpenAI Key)**  
    Create a `.env` file in the project directory:

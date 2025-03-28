@@ -7,6 +7,7 @@ import plotly.graph_objects as go
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import numpy as np
+import time
 
 from preprocess import *
 from gpt import *
@@ -58,7 +59,7 @@ def process_data(uploaded_file):
             return
         
         #Sentiment Analysis mit GPT 4o-mini
-        df["sentiment_score"], df["sentiment"], df["explanation"] = zip(*df.apply(lambda row: analyze_sentiment(row["player"], row["comment"]), axis=1))
+        df["sentiment_score"], df["sentiment"], df["explanation"], df["translation"] = zip(*df.apply(lambda row: analyze_sentiment(row["player"], row["comment"]), axis=1))
         print(df)
         
 
@@ -105,7 +106,11 @@ def main():
                     st.session_state.club_name = club_name
                     
                     # Daten verarbeiten
+                    start = time.time()
                     process_data(uploaded_json)
+                    end= time.time()
+                    processed_time = end - start
+                    print(processed_time)
                 else:
                     st.warning("Please enter club name, player name and upload a JSON file.")
 
@@ -242,9 +247,15 @@ def display_dashboard():
         fig_bar = px.bar(
             x=sentiment_counts.index,
             y=sentiment_counts.values,
-            labels={'x': 'Sentiment Label', 'y': 'Anzahl'},
+            labels={'x': 'Sentiment Label', 'y': 'Count'},
             color=sentiment_counts.index,
             color_discrete_map={'NEGATIVE': 'red', 'NEUTRAL': 'orange', 'POSITIVE': 'green'}
+        )
+        # Achsen-Ticks auf die gewünschten Labels begrenzen
+        fig_bar.update_xaxes(
+            tickmode='array',
+            tickvals=['NEGATIVE', 'NEUTRAL', 'POSITIVE'],
+            ticktext=['NEGATIVE', 'NEUTRAL', 'POSITIVE']
         )
         fig_bar.update_layout(height=250, margin=dict(l=10, r=10, t=40, b=10))
         st.plotly_chart(fig_bar, use_container_width=True)
@@ -301,10 +312,17 @@ def comments_view(player_name, label):
         st.write(f"No {label} comments available.")
     else:
         for index, row in df_player.iterrows():
-            st.write(f"**Comment:** {row['comment']}")
-            st.write(f"**Sentiment Score:** {row['sentiment_score']}")
-            st.write(f"**Explanation:** {row['explanation']}")
-            st.write("---")
+            if "translation" in df_player.columns:
+                st.write(f"**Comment:** {row['comment']}")
+                st.write(f"**Translation:** {row['translation']}")
+                st.write(f"**Sentiment Score:** {row['sentiment_score']}")
+                st.write(f"**Explanation:** {row['explanation']}")
+                st.write("---")
+            else:
+                st.write(f"**Comment:** {row['comment']}")
+                st.write(f"**Sentiment Score:** {row['sentiment_score']}")
+                st.write(f"**Explanation:** {row['explanation']}")
+                st.write("---")
 
     st.button("Back to overview", on_click=return_to_overview, key="back_to_overview_list")
 
